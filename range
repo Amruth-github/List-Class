@@ -1,0 +1,61 @@
+#include <cstdlib>
+#ifndef VECTOR_H
+#define VECTOR_H
+#include <vector>
+#endif
+using namespace std;
+
+class range
+{
+    int start;
+    int end_of_range;
+    int *arr = NULL;
+    int *first = NULL;
+    int *last;
+    void __init__(int start, int end, int step)
+    {
+        this->start = start;
+        this->end_of_range = end;
+        int k = 0;
+        for (int i = start; i < end_of_range; i += step)
+        {
+            arr = (int *)realloc(arr, (k + 1) * sizeof(int));
+            first = arr;
+            arr[k++] = i;
+            last = arr + (k - 1);
+        }
+    }
+public:
+    range(int end)
+    {
+        /* Private function */
+        __init__(0, end, 1);
+    }
+    range(int start, int end, int step = 1)
+    {   
+        /* Private function */
+        __init__(start, end, step);
+    }
+    int *begin()
+    {
+        return first;
+    }
+    int *end()
+    {
+        return (last + 1);
+    }
+    operator vector<int>()
+    {
+        vector<int> v;
+        for (auto i = this->begin(); i != this->end(); i++)
+            v.push_back(*i);
+        
+        return v;
+    }
+    ~range()
+    {
+        free(arr);
+        arr = last = first = NULL;
+    }
+    
+};
