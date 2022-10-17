@@ -549,11 +549,11 @@ std :: ostream& operator<<(ostream& os, list<std :: string> &arr)
     int top = arr.length();
     for (i = 0; i < top - 1; i++)
     {
-        os << "'" << arr[i] << "'" << ", ";
+        os << "'" << arr.pointer[i] << "'" << ", ";
     }
     if (top != 0)
     {
-        os << "'" << arr[top - 1] << "'";
+        os << "'" << arr.pointer[top - 1] << "'";
     }
     os << "]";
     return os;
