@@ -85,7 +85,7 @@ public:
     list(std :: string &from)
     {
         this->pointer = new string[from.length()];
-        copy(from.begin(), from.end(), pointer);
+        copy(from.begin(), from.end(), this->pointer);
         this->last = this->pointer + from.length();
         this->size = from.length();
     }
