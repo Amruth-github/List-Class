@@ -256,7 +256,10 @@ public:
         }
         this->pointer = new Type[l.size];
         first = pointer;
-        copy(l.begin(), l.end(), pointer);
+        int k = 0;
+            //copy(l.begin(), l.end(), pointer);
+        for (auto i : l)
+            pointer[k++] = i;
         this->size = l.size;
         last = pointer + size;
         return *this;
@@ -303,6 +306,32 @@ public:
         std :: vector<int> v(this->size);
         copy(begin(), end(), v.begin());
         return v;
+    }
+
+    list<list<Type>> operator*(list<Type> &operand2)
+    {
+        list<list<Type>> res;
+        for (auto i : *this)
+        {
+            for (auto j : operand2)
+            {
+                res.append({i, j});
+            }
+        }
+        return res;
+    }
+
+    list<list<Type>> operator*(list<Type> &&operand2)
+    {
+        list<list<Type>> res;
+        for (auto i : *this)
+        {
+            for (auto j : operand2)
+            {
+                res.append({i, j});
+            }
+        }
+        return res;
     }
 
     list<Type> operator=(std :: initializer_list<Type> &&l)
@@ -533,7 +562,7 @@ std ::ostream &operator<<(std ::ostream &os, list<Type> &arr)
     }
     if (top != 0)
     {
-        os << arr.pointer[top - 1];
+        os << arr[top - 1];
     }
     os << "]";
     return os;
@@ -546,11 +575,11 @@ std :: ostream& operator<<(ostream& os, list<std :: string> &arr)
     int top = arr.length();
     for (i = 0; i < top - 1; i++)
     {
-        os << "'" << arr.pointer[i] << "'" << ", ";
+        os << "'" << arr[i] << "'" << ", ";
     }
     if (top != 0)
     {
-        os << "'" << arr.pointer[top - 1] << "'";
+        os << "'" << arr[top - 1] << "'";
     }
     os << "]";
     return os;
