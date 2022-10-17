@@ -536,7 +536,7 @@ std ::ostream &operator<<(std ::ostream &os, list<Type> &arr)
     }
     if (top != 0)
     {
-        os << arr[top - 1];
+        os << arr.pointer[top - 1];
     }
     os << "]";
     return os;
