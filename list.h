@@ -256,10 +256,7 @@ public:
         }
         this->pointer = new Type[l.size];
         first = pointer;
-        int k = 0;
-            //copy(l.begin(), l.end(), pointer);
-        for (auto i : l)
-            pointer[k++] = i;
+        copy(l.begin(), l.end(), pointer);
         this->size = l.size;
         last = pointer + size;
         return *this;
