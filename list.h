@@ -79,13 +79,16 @@ public:
         this->first = this->pointer;
         this->last = this->pointer + copy_from.size;
         this->size = copy_from.size;
-        copy(this->pointer, this->pointer + this->size, copy_from.pointer);
+        for (int i = 0; i < copy_from.size; i++)
+        {
+            pointer[i] = copy_from.pointer[i];
+        } 
     }
 
     list(std :: string &from)
     {
         this->pointer = new string[from.length()];
-        copy(from.begin(), from.end(), this->pointer);
+        copy(from.begin(), from.end(), pointer);
         this->last = this->pointer + from.length();
         this->size = from.length();
     }
