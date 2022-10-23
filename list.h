@@ -405,37 +405,14 @@ public:
         }
     }
 
-    list<Type> operator[](const char *slice)
+    list<Type> slice(int start, int end, int step = 1)
     {
-        int start = -1, end = -1;
-        sscanf(slice, "%d:%d", &start, &end);
-        list<Type> sliced;
-        if (start == -1 && end == -1)
+        list<Type> ret;
+        for (auto i : range(start, end, step))
         {
-            sliced = *this;
+            ret.append(this->pointer[i]);
         }
-        else if (start == -1)
-        {
-            for (auto i : range(0, end))
-            {
-                sliced.append((*this)[i]);
-            }
-        }
-        else if (end == -1)
-        {
-            for (auto i : range(start, size))
-            {
-                sliced.append((*this)[i]);
-            }
-        }
-        else
-        {
-            for (auto i : range(start, end))
-            {
-                sliced.append((*this)[i]);
-            }
-        }
-        return sliced;
+        return ret;
     }
 
     bool isPresent(Type element)
