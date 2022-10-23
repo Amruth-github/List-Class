@@ -17,13 +17,27 @@ class range
         this->start = start;
         this->end_of_range = end;
         int k = 0;
-        for (int i = start; i < end_of_range; i += step)
+        if (start < end)
         {
-            arr = (int *)realloc(arr, (k + 1) * sizeof(int));
-            first = arr;
-            arr[k++] = i;
-            last = arr + (k - 1);
+            for (int i = start; i < end_of_range; i += step)
+            {
+                arr = (int *)realloc(arr, (k + 1) * sizeof(int));
+                first = arr;
+                arr[k++] = i;
+                last = arr + (k - 1);
+            }
         }
+        else
+        {
+            for (int i = start; i > end_of_range; i += step)
+            {
+                arr = (int *)realloc(arr, (k + 1) * sizeof(int));
+                first = arr;
+                arr[k++] = i;
+                last = arr + (k - 1);
+            }
+        }
+
     }
 public:
     range(int end)
