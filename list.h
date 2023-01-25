@@ -33,7 +33,6 @@ class list
     Type *last = NULL;
     void exit_sequence()
     {
-        this->~list();
         exit(-1);
     }
     bool isPresentHelper(int l, int r, Type element)
@@ -71,6 +70,14 @@ public:
         this->first = pointer;
         this->last = this->first + n;
         size = n;
+    }
+
+    list(Type *__begin, Type *__end, int step = 1)
+    {
+        for (auto i = __begin; i != __end; i+=step)
+        {
+            this->append(*i);
+        }
     }
 
     list(list<Type> &copy_from)
@@ -142,6 +149,45 @@ public:
     int length()
     {
         return this->size;
+    }
+
+    void insert(Type element, int index)
+    {
+        if (index == this->size)
+            this->append(element);
+        else
+        {
+            try
+            {
+                if (index > this->size + 1)
+                {
+                    throw std :: invalid_argument("Index out of bound");
+                }
+                else
+                {
+                    list<int> temp;
+                    if (index == 0)
+                    {
+                        temp = list<Type>({element}) + (*this);
+                    }
+                    else
+                    {
+                        list<Type> l1(this->slice(0, index));
+                        list<Type> l2(this->slice(index, size));
+                        l1.append(element);
+                        temp = l1 + l2;
+                    }
+                    delete[] pointer;
+                    pointer = new Type[++this->size];
+                    copy(temp.begin(), temp.end(), pointer);
+                }
+            }
+            catch(std :: invalid_argument& err)
+            {
+                cout << err.what() << endl;
+                exit_sequence();
+            }
+        }
     }
 
     void append(Type element)
@@ -407,12 +453,12 @@ public:
 
     list<Type> slice(int start, int end, int step = 1)
     {
-        list<Type> ret;
+        list<Type> res;
         for (auto i : range(start, end, step))
         {
-            ret.append(this->pointer[i]);
+            res.append(this->operator[](i));
         }
-        return ret;
+        return res;
     }
 
     bool isPresent(Type element)
