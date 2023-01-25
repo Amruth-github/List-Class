@@ -550,7 +550,9 @@ public:
     {
         try
         {
-            if (index >= size)
+            if (index < 0)
+                index = this->size + index;
+            if (index >= size || index < 0)
             {
                 throw std ::invalid_argument("Index out of range");
             }
