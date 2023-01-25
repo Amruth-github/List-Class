@@ -180,6 +180,7 @@ public:
                     delete[] pointer;
                     pointer = new Type[++this->size];
                     copy(temp.begin(), temp.end(), pointer);
+                    last = pointer + size;
                 }
             }
             catch(std :: invalid_argument& err)
