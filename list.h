@@ -165,7 +165,7 @@ public:
                 }
                 else
                 {
-                    list<int> temp;
+                    list<Type> temp;
                     if (index == 0)
                     {
                         temp = list<Type>({element}) + (*this);
