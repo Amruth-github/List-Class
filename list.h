@@ -22,6 +22,7 @@
 #define CSTRING_H
 #include <cstring>
 #endif
+#include <stack>
 #pragma warn - rvl
 
 template <class Type>
@@ -226,11 +227,16 @@ public:
 
     void reverse()
     {
-        reverse(this->begin(), this->end());
-        auto temp = first;
-        first = last;
-        last = temp;
-        pointer = first;
+        stack<Type> temp;
+        for (auto i : *this)
+        {
+            temp.push(i);
+        }
+        for (auto &i : *this)
+        {
+            i = temp.top();
+            temp.pop();
+        }
     }
     
     list<Type> operator+(list<Type> &&operand)
