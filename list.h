@@ -12,7 +12,7 @@
 #endif
 #ifndef RANGE_H
 #define RANGE_H
-#include <range>
+#include "range"
 #endif
 #ifndef VECTOR_H
 #define VECTOR_H
@@ -222,6 +222,15 @@ public:
             }
         }
         return indexes;
+    }
+
+    void reverse()
+    {
+        reverse(this->begin(), this->end());
+        auto temp = first;
+        first = last;
+        last = temp;
+        pointer = first;
     }
     
     list<Type> operator+(list<Type> &&operand)
